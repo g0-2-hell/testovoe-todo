@@ -13,7 +13,9 @@ import { UpdateProjectDto } from './dto/update-project.dto';
 import { UserIdBody } from 'src/types/types';
 import { Roles } from 'src/decorators/role.decorator';
 import { Role } from 'src/enums/role.enum';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth('JWT')
 @Controller('project')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
@@ -51,7 +53,7 @@ export class ProjectController {
   addEmployee(@Param('id') id: string, @Body() userIdBody: UserIdBody) {
     return this.projectService.addEmployee(id, userIdBody.userId);
   }
-  
+
   @Roles(Role.Admin)
   @Delete(':id/employee')
   deleteEmployee(@Param('id') id: string, @Body() userIdBody: UserIdBody) {

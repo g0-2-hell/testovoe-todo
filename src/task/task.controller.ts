@@ -9,7 +9,9 @@ import { Role } from 'src/enums/role.enum';
 import { Roles } from 'src/decorators/role.decorator';
 import { UpdateDeadLineDto } from './dto/update-deadline-dto';
 import { UpdateTaskProjectDto } from './dto/update-task-project-dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth('JWT')
 @Controller('task')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}

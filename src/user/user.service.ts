@@ -11,16 +11,19 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   create(createUserDto: CreateUserDto) {
-      return this.userModel.create(createUserDto);
-
+    return this.userModel.create(createUserDto);
   }
 
   findUserByEmailEndPassword(email: string, password: string) {
     return this.userModel.findOne({ email, password });
   }
 
+  findAll() {
+    return this.userModel.find();
+  }
+
   findOne(_id: string) {
-    return this.userModel.findOne({_id})
+    return this.userModel.findOne({ _id });
   }
 
   remove(_id: string) {

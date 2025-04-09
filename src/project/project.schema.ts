@@ -6,7 +6,7 @@ export type ProjectDocument = HydratedDocument<Project>;
 
 @Schema()
 export class Project {
-  @Prop({ required: true })
+  @Prop()
   title: string;
 
   @Prop()

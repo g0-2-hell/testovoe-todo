@@ -15,7 +15,9 @@ import { Public } from 'src/decorators/public.decorator';
 import { Roles } from 'src/decorators/role.decorator';
 import { Role } from 'src/enums/role.enum';
 import { EmailAlreadyRegistered } from 'src/errors/userNotFound.error';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth('JWT')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -29,7 +31,12 @@ export class UserController {
     } catch (error) {
       throw new EmailAlreadyRegistered();
     }
-    
+  }
+
+  @Public()
+  @Get()
+  findAll() {
+    return this.userService.findAll();
   }
 
   @Roles(Role.Admin)
